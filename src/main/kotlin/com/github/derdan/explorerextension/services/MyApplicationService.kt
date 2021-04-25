@@ -1,6 +1,6 @@
-package org.jetbrains.plugins.template.services
+package com.github.derdan.explorerextension.services
 
-import org.jetbrains.plugins.template.MyBundle
+import com.github.derdan.explorerextension.MyBundle
 
 class MyApplicationService {
 
