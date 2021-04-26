@@ -1,0 +1,44 @@
+{
+  parserClass="com.github.derdan.explorerextension.SRecordParser"
+
+  extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+  psiClassPrefix="SRecord"
+  psiImplClassSuffix="Impl"
+  psiPackage="com.github.derdan.explorerextension.psi"
+  psiImplPackage="com.github.derdan.explorerextension.psi.impl"
+
+  elementTypeHolderClass="com.github.derdan.explorerextension.psi.SRecordTypes"
+  elementTypeClass="com.github.derdan.explorerextension.psi.SRecordElementType"
+  tokenTypeClass="com.github.derdan.explorerextension.psi.SRecordTokenType"
+}
+
+srecordFile ::= (record EOL? )*
+
+record ::=
+(        block_record
+    |   data_record_16
+    |   data_record_24
+    |   data_record_32
+    |   count_record_16
+    |   count_record_24
+    |   start_record_16
+    |   start_record_24
+    |   start_record_32
+)
+
+byte_count ::= COUNT
+address_16 ::= BYTE BYTE
+address_24 ::= BYTE BYTE BYTE
+address_32 ::= BYTE BYTE BYTE BYTE
+data ::= BYTE*
+
+block_record ::= BLOCK_HEADER byte_count address_16  data  CHECKSUM
+data_record_16 ::= DATA_HEADER_16 byte_count address_16  data  CHECKSUM
+data_record_24 ::= DATA_HEADER_24 byte_count address_24  data  CHECKSUM
+data_record_32 ::= DATA_HEADER_32 byte_count address_32  data  CHECKSUM
+count_record_16 ::= COUNT_HEADER_16 byte_count address_16  data  CHECKSUM
+count_record_24 ::= COUNT_HEADER_24 byte_count address_24  data  CHECKSUM
+start_record_16 ::= START_ADDRESS_16 byte_count address_16  CHECKSUM
+start_record_24 ::= START_ADDRESS_24 byte_count address_24  CHECKSUM
+start_record_32 ::= START_ADDRESS_32 byte_count address_32  CHECKSUM

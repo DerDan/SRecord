@@ -26,7 +26,7 @@ version = properties("pluginVersion")
 // Configure project's dependencies
 repositories {
     mavenCentral()
-    jcenter()
+//    jcenter()
 }
 dependencies {
     detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.16.0")
@@ -120,3 +120,5 @@ tasks {
         channels(properties("pluginVersion").split('-').getOrElse(1) { "default" }.split('.').first())
     }
 }
+
+sourceSets["main"].java.srcDirs("src/main/gen")

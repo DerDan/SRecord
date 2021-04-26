@@ -10,6 +10,8 @@
     <extensions defaultExtensionNs="com.intellij">
         <applicationService serviceImplementation="com.github.derdan.explorerextension.services.MyApplicationService"/>
         <projectService serviceImplementation="com.github.derdan.explorerextension.services.MyProjectService"/>
+        <fileType name="SRecord File" implementationClass="com.github.derdan.explorerextension.SRecordFileType" fieldName="INSTANCE" language="SRecord" extensions="srec"/>
+        <lang.parserDefinition language="SRecord" implementationClass="com.github.derdan.explorerextension.SRecordParserDefinition"/>
     </extensions>
 
     <applicationListeners>
