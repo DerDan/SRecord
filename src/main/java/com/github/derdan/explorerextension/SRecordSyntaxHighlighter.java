@@ -47,7 +47,7 @@ public class SRecordSyntaxHighlighter extends SyntaxHighlighterBase {
 
     @NotNull
     @Override
-    public TextAttributesKey @NotNull [] getTokenHighlights(IElementType tokenType) {
+    public TextAttributesKey [] getTokenHighlights(IElementType tokenType) {
         if (tokenType.equals(SRecordTypes.BLOCK_HEADER)
         || tokenType.equals(SRecordTypes.DATA_HEADER_16)
         || tokenType.equals(SRecordTypes.DATA_HEADER_24)

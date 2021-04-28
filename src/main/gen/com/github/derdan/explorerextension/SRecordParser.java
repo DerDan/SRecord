@@ -161,32 +161,43 @@ public class SRecordParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // (record EOL? )*
+  // (record EOL)* record?
   static boolean srecordFile(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "srecordFile")) return false;
-    while (true) {
-      int c = current_position_(b);
-      if (!srecordFile_0(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "srecordFile", c)) break;
-    }
-    return true;
-  }
-
-  // record EOL?
-  private static boolean srecordFile_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "srecordFile_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = record(b, l + 1);
-    r = r && srecordFile_0_1(b, l + 1);
+    r = srecordFile_0(b, l + 1);
+    r = r && srecordFile_1(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
-  // EOL?
-  private static boolean srecordFile_0_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "srecordFile_0_1")) return false;
-    consumeToken(b, EOL);
+  // (record EOL)*
+  private static boolean srecordFile_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "srecordFile_0")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!srecordFile_0_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "srecordFile_0", c)) break;
+    }
+    return true;
+  }
+
+  // record EOL
+  private static boolean srecordFile_0_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "srecordFile_0_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = record(b, l + 1);
+    r = r && consumeToken(b, EOL);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // record?
+  private static boolean srecordFile_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "srecordFile_1")) return false;
+    record(b, l + 1);
     return true;
   }
 
