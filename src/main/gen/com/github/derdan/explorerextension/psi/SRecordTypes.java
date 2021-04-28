@@ -8,11 +8,7 @@ import com.github.derdan.explorerextension.psi.impl.*;
 
 public interface SRecordTypes {
 
-  IElementType ADDRESS_16 = new SRecordElementType("ADDRESS_16");
-  IElementType ADDRESS_24 = new SRecordElementType("ADDRESS_24");
-  IElementType ADDRESS_32 = new SRecordElementType("ADDRESS_32");
   IElementType BLOCK_RECORD = new SRecordElementType("BLOCK_RECORD");
-  IElementType BYTE_COUNT = new SRecordElementType("BYTE_COUNT");
   IElementType COUNT_RECORD_16 = new SRecordElementType("COUNT_RECORD_16");
   IElementType COUNT_RECORD_24 = new SRecordElementType("COUNT_RECORD_24");
   IElementType DATA = new SRecordElementType("DATA");
@@ -24,6 +20,7 @@ public interface SRecordTypes {
   IElementType START_RECORD_24 = new SRecordElementType("START_RECORD_24");
   IElementType START_RECORD_32 = new SRecordElementType("START_RECORD_32");
 
+  IElementType ADDRESS = new SRecordTokenType("ADDRESS");
   IElementType BLOCK_HEADER = new SRecordTokenType("BLOCK_HEADER");
   IElementType BYTE = new SRecordTokenType("BYTE");
   IElementType CHECKSUM = new SRecordTokenType("CHECKSUM");
@@ -41,20 +38,8 @@ public interface SRecordTypes {
   class Factory {
     public static PsiElement createElement(ASTNode node) {
       IElementType type = node.getElementType();
-      if (type == ADDRESS_16) {
-        return new SRecordAddress16Impl(node);
-      }
-      else if (type == ADDRESS_24) {
-        return new SRecordAddress24Impl(node);
-      }
-      else if (type == ADDRESS_32) {
-        return new SRecordAddress32Impl(node);
-      }
-      else if (type == BLOCK_RECORD) {
+      if (type == BLOCK_RECORD) {
         return new SRecordBlockRecordImpl(node);
-      }
-      else if (type == BYTE_COUNT) {
-        return new SRecordByteCountImpl(node);
       }
       else if (type == COUNT_RECORD_16) {
         return new SRecordCountRecord16Impl(node);

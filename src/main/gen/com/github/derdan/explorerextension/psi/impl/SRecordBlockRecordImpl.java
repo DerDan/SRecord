@@ -29,18 +29,6 @@ public class SRecordBlockRecordImpl extends ASTWrapperPsiElement implements SRec
 
   @Override
   @NotNull
-  public SRecordAddress16 getAddress16() {
-    return findNotNullChildByClass(SRecordAddress16.class);
-  }
-
-  @Override
-  @NotNull
-  public SRecordByteCount getByteCount() {
-    return findNotNullChildByClass(SRecordByteCount.class);
-  }
-
-  @Override
-  @NotNull
   public SRecordData getData() {
     return findNotNullChildByClass(SRecordData.class);
   }

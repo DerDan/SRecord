@@ -29,18 +29,6 @@ public class SRecordDataRecord32Impl extends ASTWrapperPsiElement implements SRe
 
   @Override
   @NotNull
-  public SRecordAddress32 getAddress32() {
-    return findNotNullChildByClass(SRecordAddress32.class);
-  }
-
-  @Override
-  @NotNull
-  public SRecordByteCount getByteCount() {
-    return findNotNullChildByClass(SRecordByteCount.class);
-  }
-
-  @Override
-  @NotNull
   public SRecordData getData() {
     return findNotNullChildByClass(SRecordData.class);
   }

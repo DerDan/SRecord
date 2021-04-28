@@ -7,10 +7,4 @@ import com.intellij.psi.PsiElement;
 
 public interface SRecordStartRecord24 extends PsiElement {
 
-  @NotNull
-  SRecordAddress24 getAddress24();
-
-  @NotNull
-  SRecordByteCount getByteCount();
-
 }

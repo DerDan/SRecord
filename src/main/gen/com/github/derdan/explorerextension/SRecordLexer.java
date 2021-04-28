@@ -24,9 +24,12 @@ class SRecordLexer implements FlexLexer {
 
   /** lexical states */
   public static final int YYINITIAL = 0;
-  public static final int WAITING_BYTES = 2;
-  public static final int WAITING_COUNT = 4;
-  public static final int WAITING_CS = 6;
+  public static final int WAITING_COUNT = 2;
+  public static final int WAIT_ADDRESS_16 = 4;
+  public static final int WAIT_ADDRESS_24 = 6;
+  public static final int WAIT_ADDRESS_32 = 8;
+  public static final int WAITING_BYTES = 10;
+  public static final int WAITING_CS = 12;
 
   /**
    * ZZ_LEXSTATE[l] is the state in the DFA for the lexical state l
@@ -35,7 +38,7 @@ class SRecordLexer implements FlexLexer {
    * l is of the form l = 2*k, k a non negative integer
    */
   private static final int ZZ_LEXSTATE[] = { 
-     0,  0,  1,  1,  2,  2,  3, 3
+     0,  0,  1,  1,  2,  2,  3,  3,  4,  4,  5,  5,  6, 6
   };
 
   /** 
@@ -66,11 +69,12 @@ class SRecordLexer implements FlexLexer {
   private static final int [] ZZ_ACTION = zzUnpackAction();
 
   private static final String ZZ_ACTION_PACKED_0 =
-    "\4\0\2\1\2\2\3\1\1\3\1\4\1\5\1\6"+
-    "\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\16";
+    "\7\0\2\1\2\2\6\1\1\3\1\4\1\5\1\6"+
+    "\1\7\1\10\1\11\1\12\1\13\1\14\3\0\1\15"+
+    "\1\16\3\0\1\17\4\0\1\20\2\0\1\21";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[23];
+    int [] result = new int[44];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -95,12 +99,15 @@ class SRecordLexer implements FlexLexer {
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
 
   private static final String ZZ_ROWMAP_PACKED_0 =
-    "\0\0\0\16\0\34\0\52\0\70\0\106\0\124\0\70"+
-    "\0\142\0\160\0\176\0\70\0\70\0\70\0\70\0\70"+
-    "\0\70\0\70\0\70\0\70\0\70\0\70\0\70";
+    "\0\0\0\16\0\34\0\52\0\70\0\106\0\124\0\142"+
+    "\0\160\0\176\0\142\0\214\0\232\0\250\0\266\0\304"+
+    "\0\322\0\142\0\142\0\142\0\142\0\142\0\142\0\142"+
+    "\0\142\0\142\0\142\0\340\0\356\0\374\0\142\0\142"+
+    "\0\u010a\0\u0118\0\u0126\0\142\0\u0134\0\u0142\0\u0150\0\u015e"+
+    "\0\142\0\u016c\0\u017a\0\142";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[23];
+    int [] result = new int[44];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -123,14 +130,19 @@ class SRecordLexer implements FlexLexer {
   private static final int [] ZZ_TRANS = zzUnpackTrans();
 
   private static final String ZZ_TRANS_PACKED_0 =
-    "\2\5\1\6\11\5\1\7\1\10\1\5\13\11\1\7"+
-    "\1\10\1\5\13\12\1\7\1\10\1\5\13\13\1\7"+
-    "\1\10\21\0\1\14\1\15\1\16\1\17\1\20\1\21"+
-    "\1\22\1\23\1\24\17\0\1\10\1\0\13\25\3\0"+
-    "\13\26\3\0\13\27\2\0";
+    "\2\10\1\11\11\10\1\12\1\13\1\10\13\14\1\12"+
+    "\1\13\1\10\13\15\1\12\1\13\1\10\13\16\1\12"+
+    "\1\13\1\10\13\17\1\12\1\13\1\10\13\20\1\12"+
+    "\1\13\1\10\13\21\1\12\1\13\21\0\1\22\1\23"+
+    "\1\24\1\25\1\26\1\27\1\30\1\31\1\32\17\0"+
+    "\1\13\1\0\13\33\3\0\13\34\3\0\13\35\3\0"+
+    "\13\36\3\0\13\37\3\0\13\40\3\0\13\41\3\0"+
+    "\13\42\3\0\13\43\3\0\13\44\3\0\13\45\3\0"+
+    "\13\46\3\0\13\47\3\0\13\50\3\0\13\51\3\0"+
+    "\13\52\3\0\13\53\3\0\13\54\2\0";
 
   private static int [] zzUnpackTrans() {
-    int [] result = new int[140];
+    int [] result = new int[392];
     int offset = 0;
     offset = zzUnpackTrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -168,10 +180,11 @@ class SRecordLexer implements FlexLexer {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\4\0\1\11\2\1\1\11\3\1\14\11";
+    "\7\0\1\11\2\1\1\11\6\1\12\11\3\0\2\11"+
+    "\3\0\1\11\4\0\1\11\2\0\1\11";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[23];
+    int [] result = new int[44];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -228,6 +241,7 @@ class SRecordLexer implements FlexLexer {
 
   /* user code: */
 private int byte_count;
+private int address_state;
 
 
   /**
@@ -491,72 +505,87 @@ private int byte_count;
             { return TokenType.BAD_CHARACTER;
             } 
             // fall through
-          case 15: break;
+          case 18: break;
           case 2: 
             { return SRecordTypes.EOL;
             } 
             // fall through
-          case 16: break;
-          case 3: 
-            { yybegin(WAITING_COUNT); return SRecordTypes.BLOCK_HEADER;
-            } 
-            // fall through
-          case 17: break;
-          case 4: 
-            { yybegin(WAITING_COUNT); return SRecordTypes.DATA_HEADER_16;
-            } 
-            // fall through
-          case 18: break;
-          case 5: 
-            { yybegin(WAITING_COUNT); return SRecordTypes.DATA_HEADER_24;
-            } 
-            // fall through
           case 19: break;
-          case 6: 
-            { yybegin(WAITING_COUNT); return SRecordTypes.DATA_HEADER_32;
+          case 3: 
+            { yybegin(WAITING_COUNT); address_state=  WAIT_ADDRESS_16;return SRecordTypes.BLOCK_HEADER;
             } 
             // fall through
           case 20: break;
-          case 7: 
-            { yybegin(WAITING_COUNT); return SRecordTypes.COUNT_HEADER_16;
+          case 4: 
+            { yybegin(WAITING_COUNT); address_state=  WAIT_ADDRESS_16;return SRecordTypes.DATA_HEADER_16;
             } 
             // fall through
           case 21: break;
-          case 8: 
-            { yybegin(WAITING_COUNT); return SRecordTypes.COUNT_HEADER_24;
+          case 5: 
+            { yybegin(WAITING_COUNT); address_state=  WAIT_ADDRESS_24;return SRecordTypes.DATA_HEADER_24;
             } 
             // fall through
           case 22: break;
-          case 9: 
-            { yybegin(WAITING_COUNT); return SRecordTypes.START_ADDRESS_16;
+          case 6: 
+            { yybegin(WAITING_COUNT); address_state=  WAIT_ADDRESS_32;return SRecordTypes.DATA_HEADER_32;
             } 
             // fall through
           case 23: break;
-          case 10: 
-            { yybegin(WAITING_COUNT); return SRecordTypes.START_ADDRESS_24;
+          case 7: 
+            { yybegin(WAITING_COUNT); address_state=  WAIT_ADDRESS_16;return SRecordTypes.COUNT_HEADER_16;
             } 
             // fall through
           case 24: break;
-          case 11: 
-            { yybegin(WAITING_COUNT); return SRecordTypes.START_ADDRESS_32;
+          case 8: 
+            { yybegin(WAITING_COUNT); address_state=  WAIT_ADDRESS_24;return SRecordTypes.COUNT_HEADER_24;
             } 
             // fall through
           case 25: break;
-          case 12: 
-            { byte_count --; yybegin(byte_count > 1 ? WAITING_BYTES:WAITING_CS);  return SRecordTypes.BYTE;
+          case 9: 
+            { yybegin(WAITING_COUNT); address_state=  WAIT_ADDRESS_16;return SRecordTypes.START_ADDRESS_16;
             } 
             // fall through
           case 26: break;
-          case 13: 
-            { byte_count = Integer.parseInt(yytext().toString(), 16); yybegin(WAITING_BYTES);  return SRecordTypes.COUNT;
+          case 10: 
+            { yybegin(WAITING_COUNT); address_state=  WAIT_ADDRESS_24;return SRecordTypes.START_ADDRESS_24;
             } 
             // fall through
           case 27: break;
+          case 11: 
+            { yybegin(WAITING_COUNT); address_state=  WAIT_ADDRESS_32;return SRecordTypes.START_ADDRESS_32;
+            } 
+            // fall through
+          case 28: break;
+          case 12: 
+            { byte_count = Integer.parseInt(yytext().toString(), 16); yybegin(address_state);  return SRecordTypes.COUNT;
+            } 
+            // fall through
+          case 29: break;
+          case 13: 
+            { byte_count -= 1; yybegin(byte_count > 1 ? WAITING_BYTES:WAITING_CS);  return SRecordTypes.BYTE;
+            } 
+            // fall through
+          case 30: break;
           case 14: 
             { yybegin(YYINITIAL);  return SRecordTypes.CHECKSUM;
             } 
             // fall through
-          case 28: break;
+          case 31: break;
+          case 15: 
+            { byte_count -= 2; yybegin(byte_count > 1 ? WAITING_BYTES:WAITING_CS);  return SRecordTypes.ADDRESS;
+            } 
+            // fall through
+          case 32: break;
+          case 16: 
+            { byte_count -= 3; yybegin(byte_count > 1 ? WAITING_BYTES:WAITING_CS);  return SRecordTypes.ADDRESS;
+            } 
+            // fall through
+          case 33: break;
+          case 17: 
+            { byte_count -= 4; yybegin(byte_count > 1 ? WAITING_BYTES:WAITING_CS);  return SRecordTypes.ADDRESS;
+            } 
+            // fall through
+          case 34: break;
           default:
             zzScanError(ZZ_NO_MATCH);
           }

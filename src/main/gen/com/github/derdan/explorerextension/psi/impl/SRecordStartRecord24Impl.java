@@ -27,16 +27,4 @@ public class SRecordStartRecord24Impl extends ASTWrapperPsiElement implements SR
     else super.accept(visitor);
   }
 
-  @Override
-  @NotNull
-  public SRecordAddress24 getAddress24() {
-    return findNotNullChildByClass(SRecordAddress24.class);
-  }
-
-  @Override
-  @NotNull
-  public SRecordByteCount getByteCount() {
-    return findNotNullChildByClass(SRecordByteCount.class);
-  }
-
 }

@@ -36,51 +36,13 @@ public class SRecordParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // BYTE BYTE
-  public static boolean address_16(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "address_16")) return false;
-    if (!nextTokenIs(b, BYTE)) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeTokens(b, 0, BYTE, BYTE);
-    exit_section_(b, m, ADDRESS_16, r);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // BYTE BYTE BYTE
-  public static boolean address_24(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "address_24")) return false;
-    if (!nextTokenIs(b, BYTE)) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeTokens(b, 0, BYTE, BYTE, BYTE);
-    exit_section_(b, m, ADDRESS_24, r);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // BYTE BYTE BYTE BYTE
-  public static boolean address_32(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "address_32")) return false;
-    if (!nextTokenIs(b, BYTE)) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeTokens(b, 0, BYTE, BYTE, BYTE, BYTE);
-    exit_section_(b, m, ADDRESS_32, r);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // BLOCK_HEADER byte_count address_16  data  CHECKSUM
+  // BLOCK_HEADER     COUNT ADDRESS  data  CHECKSUM
   public static boolean block_record(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "block_record")) return false;
     if (!nextTokenIs(b, BLOCK_HEADER)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, BLOCK_HEADER);
-    r = r && byte_count(b, l + 1);
-    r = r && address_16(b, l + 1);
+    r = consumeTokens(b, 0, BLOCK_HEADER, COUNT, ADDRESS);
     r = r && data(b, l + 1);
     r = r && consumeToken(b, CHECKSUM);
     exit_section_(b, m, BLOCK_RECORD, r);
@@ -88,27 +50,13 @@ public class SRecordParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // COUNT
-  public static boolean byte_count(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "byte_count")) return false;
-    if (!nextTokenIs(b, COUNT)) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeToken(b, COUNT);
-    exit_section_(b, m, BYTE_COUNT, r);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // COUNT_HEADER_16 byte_count address_16  data  CHECKSUM
+  // COUNT_HEADER_16  COUNT ADDRESS  data  CHECKSUM
   public static boolean count_record_16(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "count_record_16")) return false;
     if (!nextTokenIs(b, COUNT_HEADER_16)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, COUNT_HEADER_16);
-    r = r && byte_count(b, l + 1);
-    r = r && address_16(b, l + 1);
+    r = consumeTokens(b, 0, COUNT_HEADER_16, COUNT, ADDRESS);
     r = r && data(b, l + 1);
     r = r && consumeToken(b, CHECKSUM);
     exit_section_(b, m, COUNT_RECORD_16, r);
@@ -116,15 +64,13 @@ public class SRecordParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // COUNT_HEADER_24 byte_count address_24  data  CHECKSUM
+  // COUNT_HEADER_24  COUNT ADDRESS  data  CHECKSUM
   public static boolean count_record_24(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "count_record_24")) return false;
     if (!nextTokenIs(b, COUNT_HEADER_24)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, COUNT_HEADER_24);
-    r = r && byte_count(b, l + 1);
-    r = r && address_24(b, l + 1);
+    r = consumeTokens(b, 0, COUNT_HEADER_24, COUNT, ADDRESS);
     r = r && data(b, l + 1);
     r = r && consumeToken(b, CHECKSUM);
     exit_section_(b, m, COUNT_RECORD_24, r);
@@ -146,15 +92,13 @@ public class SRecordParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // DATA_HEADER_16 byte_count address_16  data  CHECKSUM
+  // DATA_HEADER_16   COUNT ADDRESS  data  CHECKSUM
   public static boolean data_record_16(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "data_record_16")) return false;
     if (!nextTokenIs(b, DATA_HEADER_16)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, DATA_HEADER_16);
-    r = r && byte_count(b, l + 1);
-    r = r && address_16(b, l + 1);
+    r = consumeTokens(b, 0, DATA_HEADER_16, COUNT, ADDRESS);
     r = r && data(b, l + 1);
     r = r && consumeToken(b, CHECKSUM);
     exit_section_(b, m, DATA_RECORD_16, r);
@@ -162,15 +106,13 @@ public class SRecordParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // DATA_HEADER_24 byte_count address_24  data  CHECKSUM
+  // DATA_HEADER_24   COUNT ADDRESS  data  CHECKSUM
   public static boolean data_record_24(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "data_record_24")) return false;
     if (!nextTokenIs(b, DATA_HEADER_24)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, DATA_HEADER_24);
-    r = r && byte_count(b, l + 1);
-    r = r && address_24(b, l + 1);
+    r = consumeTokens(b, 0, DATA_HEADER_24, COUNT, ADDRESS);
     r = r && data(b, l + 1);
     r = r && consumeToken(b, CHECKSUM);
     exit_section_(b, m, DATA_RECORD_24, r);
@@ -178,15 +120,13 @@ public class SRecordParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // DATA_HEADER_32 byte_count address_32  data  CHECKSUM
+  // DATA_HEADER_32   COUNT ADDRESS  data  CHECKSUM
   public static boolean data_record_32(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "data_record_32")) return false;
     if (!nextTokenIs(b, DATA_HEADER_32)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, DATA_HEADER_32);
-    r = r && byte_count(b, l + 1);
-    r = r && address_32(b, l + 1);
+    r = consumeTokens(b, 0, DATA_HEADER_32, COUNT, ADDRESS);
     r = r && data(b, l + 1);
     r = r && consumeToken(b, CHECKSUM);
     exit_section_(b, m, DATA_RECORD_32, r);
@@ -251,46 +191,37 @@ public class SRecordParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // START_ADDRESS_16 byte_count address_16  CHECKSUM
+  // START_ADDRESS_16 COUNT ADDRESS        CHECKSUM
   public static boolean start_record_16(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "start_record_16")) return false;
     if (!nextTokenIs(b, START_ADDRESS_16)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, START_ADDRESS_16);
-    r = r && byte_count(b, l + 1);
-    r = r && address_16(b, l + 1);
-    r = r && consumeToken(b, CHECKSUM);
+    r = consumeTokens(b, 0, START_ADDRESS_16, COUNT, ADDRESS, CHECKSUM);
     exit_section_(b, m, START_RECORD_16, r);
     return r;
   }
 
   /* ********************************************************** */
-  // START_ADDRESS_24 byte_count address_24  CHECKSUM
+  // START_ADDRESS_24 COUNT ADDRESS        CHECKSUM
   public static boolean start_record_24(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "start_record_24")) return false;
     if (!nextTokenIs(b, START_ADDRESS_24)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, START_ADDRESS_24);
-    r = r && byte_count(b, l + 1);
-    r = r && address_24(b, l + 1);
-    r = r && consumeToken(b, CHECKSUM);
+    r = consumeTokens(b, 0, START_ADDRESS_24, COUNT, ADDRESS, CHECKSUM);
     exit_section_(b, m, START_RECORD_24, r);
     return r;
   }
 
   /* ********************************************************** */
-  // START_ADDRESS_32 byte_count address_32  CHECKSUM
+  // START_ADDRESS_32 COUNT ADDRESS        CHECKSUM
   public static boolean start_record_32(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "start_record_32")) return false;
     if (!nextTokenIs(b, START_ADDRESS_32)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, START_ADDRESS_32);
-    r = r && byte_count(b, l + 1);
-    r = r && address_32(b, l + 1);
-    r = r && consumeToken(b, CHECKSUM);
+    r = consumeTokens(b, 0, START_ADDRESS_32, COUNT, ADDRESS, CHECKSUM);
     exit_section_(b, m, START_RECORD_32, r);
     return r;
   }

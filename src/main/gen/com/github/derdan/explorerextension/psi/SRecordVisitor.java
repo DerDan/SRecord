@@ -7,23 +7,7 @@ import com.intellij.psi.PsiElement;
 
 public class SRecordVisitor extends PsiElementVisitor {
 
-  public void visitAddress16(@NotNull SRecordAddress16 o) {
-    visitPsiElement(o);
-  }
-
-  public void visitAddress24(@NotNull SRecordAddress24 o) {
-    visitPsiElement(o);
-  }
-
-  public void visitAddress32(@NotNull SRecordAddress32 o) {
-    visitPsiElement(o);
-  }
-
   public void visitBlockRecord(@NotNull SRecordBlockRecord o) {
-    visitPsiElement(o);
-  }
-
-  public void visitByteCount(@NotNull SRecordByteCount o) {
     visitPsiElement(o);
   }
 
