@@ -12,6 +12,8 @@
         <projectService serviceImplementation="com.github.derdan.explorerextension.services.MyProjectService"/>
         <fileType name="SRecord File" implementationClass="com.github.derdan.explorerextension.SRecordFileType" fieldName="INSTANCE" language="SRecord" extensions="srec"/>
         <lang.parserDefinition language="SRecord" implementationClass="com.github.derdan.explorerextension.SRecordParserDefinition"/>
+        <lang.syntaxHighlighterFactory language="SRecord"
+                                       implementationClass="com.github.derdan.explorerextension.SRecordSyntaxHighlighterFactory"/>
     </extensions>
 
     <applicationListeners>
