@@ -27,14 +27,33 @@ record ::=
     |   start_record_32
 )
 
-data ::= BYTE*
 
-block_record ::=    BLOCK_HEADER     COUNT ADDRESS  data  CHECKSUM
-data_record_16 ::=  DATA_HEADER_16   COUNT ADDRESS  data  CHECKSUM
-data_record_24 ::=  DATA_HEADER_24   COUNT ADDRESS  data  CHECKSUM
-data_record_32 ::=  DATA_HEADER_32   COUNT ADDRESS  data  CHECKSUM
-count_record_16 ::= COUNT_HEADER_16  COUNT ADDRESS  data  CHECKSUM
-count_record_24 ::= COUNT_HEADER_24  COUNT ADDRESS  data  CHECKSUM
-start_record_16 ::= START_ADDRESS_16 COUNT ADDRESS        CHECKSUM
-start_record_24 ::= START_ADDRESS_24 COUNT ADDRESS        CHECKSUM
-start_record_32 ::= START_ADDRESS_32 COUNT ADDRESS        CHECKSUM
+checksum_ ::= CHECKSUM
+count_ ::= COUNT
+byte_ ::= BYTE
+data_ ::= byte_*
+address_ ::= ADDRESS
+
+
+
+block_header_ ::= BLOCK_HEADER
+data_header_16_ ::= DATA_HEADER_16
+data_header_24_ ::= DATA_HEADER_24
+data_header_32_ ::= DATA_HEADER_32
+count_header_16_ ::= COUNT_HEADER_16
+count_header_24_ ::= COUNT_HEADER_24
+start_address_16_ ::= START_ADDRESS_16
+start_address_24_ ::= START_ADDRESS_24
+start_address_32_ ::= START_ADDRESS_32
+
+
+
+block_record ::=    block_header_     count_ address_  data_  checksum_
+data_record_16 ::=  data_header_16_   count_ address_  data_  checksum_
+data_record_24 ::=  data_header_24_   count_ address_  data_  checksum_
+data_record_32 ::=  data_header_32_   count_ address_  data_  checksum_
+count_record_16 ::= count_header_16_  count_ address_  data_  checksum_
+count_record_24 ::= count_header_24_  count_ address_  data_  checksum_
+start_record_16 ::= start_address_16_ count_ address_         checksum_
+start_record_24 ::= start_address_24_ count_ address_         checksum_
+start_record_32 ::= start_address_32_ count_ address_         checksum_

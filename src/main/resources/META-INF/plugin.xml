@@ -8,16 +8,11 @@
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="com.github.derdan.explorerextension.services.MyApplicationService"/>
-        <projectService serviceImplementation="com.github.derdan.explorerextension.services.MyProjectService"/>
         <fileType name="SRecord File" implementationClass="com.github.derdan.explorerextension.SRecordFileType" fieldName="INSTANCE" language="SRecord" extensions="srec"/>
         <lang.parserDefinition language="SRecord" implementationClass="com.github.derdan.explorerextension.SRecordParserDefinition"/>
         <lang.syntaxHighlighterFactory language="SRecord"
                                        implementationClass="com.github.derdan.explorerextension.SRecordSyntaxHighlighterFactory"/>
+        <codeInsight.inlayProvider language="SRecord" implementationClass="SRecordInlayHintsProvider"/>
     </extensions>
 
-    <applicationListeners>
-        <listener class="com.github.derdan.explorerextension.listeners.MyProjectManagerListener"
-                  topic="com.intellij.openapi.project.ProjectManagerListener"/>
-    </applicationListeners>
 </idea-plugin>
