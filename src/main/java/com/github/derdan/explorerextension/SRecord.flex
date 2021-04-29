@@ -61,4 +61,4 @@ CRLF= \r|\n|\r\n
 <WAITING_CS> {HEX_8}            { yybegin(YYINITIAL);  return SRecordTypes.CHECKSUM; }
 {CRLF}                          { return SRecordTypes.EOL; }
 //<<EOF>>                         { return SRecordTypes.EOF; }
-[^]                             { return TokenType.BAD_CHARACTER; }
+[^]                             { yybegin(YYINITIAL); return TokenType.BAD_CHARACTER; }

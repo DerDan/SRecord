@@ -502,7 +502,7 @@ private int address_state;
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1: 
-            { return TokenType.BAD_CHARACTER;
+            { yybegin(YYINITIAL); return TokenType.BAD_CHARACTER;
             } 
             // fall through
           case 18: break;
