@@ -6,6 +6,7 @@ import com.intellij.lexer.Lexer;
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.HighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
+import com.intellij.openapi.editor.markup.EffectType;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
@@ -14,6 +15,7 @@ import org.jetbrains.annotations.NotNull;
 import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAttributesKey;
 
 public class SRecordSyntaxHighlighter extends SyntaxHighlighterBase {
+
 
     public static final TextAttributesKey SEPARATOR =
             createTextAttributesKey("SRECORD_SEPARATOR", DefaultLanguageHighlighterColors.OPERATION_SIGN);
@@ -26,10 +28,8 @@ public class SRecordSyntaxHighlighter extends SyntaxHighlighterBase {
     public static final TextAttributesKey PARAMETER =
             createTextAttributesKey("SRECORD_PARAMETER", DefaultLanguageHighlighterColors.PARAMETER);
 
-
     public static final TextAttributesKey BAD_CHARACTER =
             createTextAttributesKey("SRECORD_BAD_CHARACTER", HighlighterColors.BAD_CHARACTER);
-
 
     private static final TextAttributesKey[] BAD_CHAR_KEYS = new TextAttributesKey[]{BAD_CHARACTER};
     private static final TextAttributesKey[] SEPARATOR_KEYS = new TextAttributesKey[]{SEPARATOR};

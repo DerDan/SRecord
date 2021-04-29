@@ -18,6 +18,7 @@ import com.intellij.psi.TokenType;
 %{
 private int byte_count;
 private int address_state;
+// nuschel
 %}
 
 HEX_8=[0-9A-Z]{2}
@@ -33,7 +34,7 @@ COUNT_HEADER_24=S6
 START_ADDRESS_16=S9
 START_ADDRESS_24=S8
 START_ADDRESS_32=S7
-CRLF= \r|\n|\r\n
+CRLF= \R
 
 %state WAITING_COUNT
 %state WAIT_ADDRESS_16
@@ -59,6 +60,6 @@ CRLF= \r|\n|\r\n
 <WAIT_ADDRESS_32> {HEX_32}      { byte_count -= 4; yybegin(byte_count > 1 ? WAITING_BYTES:WAITING_CS);  return SRecordTypes.ADDRESS; }
 <WAITING_BYTES> {HEX_8}         { byte_count -= 1; yybegin(byte_count > 1 ? WAITING_BYTES:WAITING_CS);  return SRecordTypes.BYTE; }
 <WAITING_CS> {HEX_8}            { yybegin(YYINITIAL);  return SRecordTypes.CHECKSUM; }
-{CRLF}                          { return SRecordTypes.EOL; }
+{CRLF}                          { yybegin(YYINITIAL); return SRecordTypes.EOL; }
 //<<EOF>>                         { return SRecordTypes.EOF; }
 [^]                             { yybegin(YYINITIAL); return TokenType.BAD_CHARACTER; }

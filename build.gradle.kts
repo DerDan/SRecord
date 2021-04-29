@@ -2,6 +2,8 @@ import io.gitlab.arturbosch.detekt.Detekt
 import org.jetbrains.changelog.closure
 import org.jetbrains.changelog.markdownToHTML
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.grammarkit.tasks.GenerateLexer
+import org.jetbrains.grammarkit.tasks.GenerateParser
 
 fun properties(key: String) = project.findProperty(key).toString()
 
@@ -18,6 +20,9 @@ plugins {
     id("io.gitlab.arturbosch.detekt") version "1.16.0"
     // ktlint linter - read more: https://github.com/JLLeitschuh/ktlint-gradle
     id("org.jlleitschuh.gradle.ktlint") version "10.0.0"
+
+    id("org.jetbrains.grammarkit") version "2020.2.1"
+
 }
 
 group = properties("pluginGroup")
@@ -65,9 +70,32 @@ detekt {
     }
 }
 
+val generateParser = task<GenerateParser>("generateParser") {
+    group = "build"
+    description = "Generate the Parser"
+    source = "src/main/java/com/github/derdan/explorerextension/SRecord.bnf"
+    targetRoot = "src/main/gen/"
+    pathToParser = "com/github/derdan/explorerextension/SRecordParser.java"
+    pathToPsiRoot = "com/github/derdan/explorerextension/psi"
+    purgeOldFiles = true
+}
+
+val generateLexer = task<GenerateLexer>("generateLexer") {
+    dependsOn(generateParser)
+    group = "build"
+    description = "Generate the Lexer"
+    source = "src/main/java/com/github/derdan/explorerextension/SRecord.flex"
+    targetDir = "src/main/gen/com/github/derdan/explorerextension"
+    targetClass = "SRecordLexer"
+    purgeOldFiles = true
+}
+
+
 tasks {
     // Set the compatibility versions to 1.8
     withType<JavaCompile> {
+        dependsOn(generateParser)
+        dependsOn(generateParser)
         sourceCompatibility = "1.8"
         targetCompatibility = "1.8"
     }
