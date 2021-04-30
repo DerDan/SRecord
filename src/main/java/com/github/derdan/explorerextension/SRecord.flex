@@ -42,6 +42,7 @@ CRLF= \R
 %state WAIT_ADDRESS_32
 %state WAITING_BYTES
 %state WAITING_CS
+%state BAD_SEQUENCE
 
 %%
 
@@ -62,4 +63,5 @@ CRLF= \R
 <WAITING_CS> {HEX_8}            { yybegin(YYINITIAL);  return SRecordTypes.CHECKSUM; }
 {CRLF}                          { yybegin(YYINITIAL); return SRecordTypes.EOL; }
 //<<EOF>>                         { return SRecordTypes.EOF; }
-[^]                             { yybegin(YYINITIAL); return TokenType.BAD_CHARACTER; }
+[^]                             { yybegin(BAD_SEQUENCE); }
+<BAD_SEQUENCE>[^\R]             { yybegin(BAD_SEQUENCE); return TokenType.BAD_CHARACTER; }

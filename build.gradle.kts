@@ -95,11 +95,13 @@ tasks {
     // Set the compatibility versions to 11
     withType<JavaCompile> {
         dependsOn(generateParser)
-        dependsOn(generateParser)
+        dependsOn(generateLexer)
         sourceCompatibility = "11"
         targetCompatibility = "11"
     }
     withType<KotlinCompile> {
+        dependsOn(generateParser)
+        dependsOn(generateLexer)
         kotlinOptions.jvmTarget = "11"
         kotlinOptions.freeCompilerArgs += "-Xjvm-default=enable"
     }
