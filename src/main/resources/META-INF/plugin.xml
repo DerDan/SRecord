@@ -12,7 +12,7 @@
         <lang.parserDefinition language="SRecord" implementationClass="com.github.derdan.explorerextension.SRecordParserDefinition"/>
         <lang.syntaxHighlighterFactory language="SRecord"
                                        implementationClass="com.github.derdan.explorerextension.SRecordSyntaxHighlighterFactory"/>
-        <codeInsight.inlayProvider language="SRecord" implementationClass="SRecordInlayHintsProvider"/>
+        <codeInsight.inlayProvider language="SRecord" implementationClass="com.github.derdan.explorerextension.SRecordInlayHintsProvider"/>
     </extensions>
 
 </idea-plugin>

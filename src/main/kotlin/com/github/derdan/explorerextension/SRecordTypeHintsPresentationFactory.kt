@@ -1,3 +1,5 @@
+package com.github.derdan.explorerextension
+
 import com.intellij.codeInsight.hints.presentation.InlayPresentation
 import com.intellij.codeInsight.hints.presentation.PresentationFactory
 
