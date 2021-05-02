@@ -66,7 +66,7 @@ class SRecordInlayHintsProvider : InlayHintsProvider<SRecordInlayHintsProvider.S
                         typeHintsFactory.textHint("addr:"))
                     is SRecordByte_ -> {
                         if (settings.showBytes) {
-                            sink.addInlineElement(element.startOffset, true, typeHintsFactory.textHint(""))
+                            sink.addInlineElement(element.startOffset, true, factory.textSpacePlaceholder(1, true))
                         }
                     }
                     is SRecordData_ -> {
@@ -78,7 +78,7 @@ class SRecordInlayHintsProvider : InlayHintsProvider<SRecordInlayHintsProvider.S
                         if (settings.showAscii) {
                             var asciiHint = ""
                             element.byte_List.forEach(action = { asciiHint += getAscii(it.text) })
-                            sink.addInlineElement(element.endOffset, true, typeHintsFactory.asciiHint(asciiHint))
+                            sink.addInlineElement(element.endOffset, true, factory.text(asciiHint))
                         }
 
                     }

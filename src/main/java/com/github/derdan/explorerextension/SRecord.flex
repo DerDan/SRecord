@@ -64,4 +64,4 @@ CRLF= \R
 {CRLF}                          { yybegin(YYINITIAL); return SRecordTypes.EOL; }
 //<<EOF>>                         { return SRecordTypes.EOF; }
 [^]                             { yybegin(BAD_SEQUENCE); }
-<BAD_SEQUENCE>[^]*\R?           { yybegin(BAD_SEQUENCE); return TokenType.BAD_CHARACTER; }
+<BAD_SEQUENCE>[^]*\R?           { yybegin(YYINITIAL); return TokenType.BAD_CHARACTER; }
