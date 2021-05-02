@@ -22,6 +22,7 @@ class SRecordInlayHintsProvider : InlayHintsProvider<SRecordInlayHintsProvider.S
         var showAddress: Boolean = true,
         var showBytes: Boolean = true,
         var showData: Boolean = true,
+        var showAscii: Boolean = true,
         var showChecksum: Boolean = true,
     ) {
     }
@@ -42,6 +43,7 @@ class SRecordInlayHintsProvider : InlayHintsProvider<SRecordInlayHintsProvider.S
                 ImmediateConfigurable.Case("show Address", "showAddress", settings::showAddress),
                 ImmediateConfigurable.Case("show Bytes", "showBytes", settings::showBytes),
                 ImmediateConfigurable.Case("show Data", "showData", settings::showData),
+                ImmediateConfigurable.Case("show ASCII", "showData", settings::showAscii),
                 ImmediateConfigurable.Case("show Checksum", "showChecksum", settings::showChecksum),
             )
 
@@ -50,34 +52,49 @@ class SRecordInlayHintsProvider : InlayHintsProvider<SRecordInlayHintsProvider.S
 
     override fun createSettings(): Settings = Settings()
 
-    override fun getCollectorFor(
-        file: PsiFile, editor: Editor, settings: Settings, sink: InlayHintsSink,
-    ): InlayHintsCollector = object : FactoryInlayHintsCollector(editor) {
-        val typeHintsFactory = SRecordTypeHintsPresentationFactory(factory)
-        override fun collect(element: PsiElement, editor: Editor, sink: InlayHintsSink): Boolean {
-            if (file.project.service<DumbService>().isDumb) return true
-            when (element) {
-                is SRecordCount_ -> if (settings.showCount) sink.addInlineElement(element.startOffset, true,
-                    typeHintsFactory.textHint("count:"))
-                is SRecordAddress_ -> if (settings.showAddress) sink.addInlineElement(element.startOffset,
-                    true,
-                    typeHintsFactory.textHint("addr:"))
-                is SRecordByte_ -> {
-                    if (settings.showBytes) {
-                        sink.addInlineElement(element.startOffset, true, typeHintsFactory.textHint(""))
-//                        element.getValue();
+    override fun getCollectorFor(file: PsiFile, editor: Editor, settings: Settings, sink: InlayHintsSink):
+            InlayHintsCollector =
+        object : FactoryInlayHintsCollector(editor) {
+            val typeHintsFactory = SRecordTypeHintsPresentationFactory(factory)
+            override fun collect(element: PsiElement, editor: Editor, sink: InlayHintsSink): Boolean {
+                if (file.project.service<DumbService>().isDumb) return true
+                when (element) {
+                    is SRecordCount_ -> if (settings.showCount) sink.addInlineElement(element.startOffset, true,
+                        typeHintsFactory.textHint("count:"))
+                    is SRecordAddress_ -> if (settings.showAddress) sink.addInlineElement(element.startOffset,
+                        true,
+                        typeHintsFactory.textHint("addr:"))
+                    is SRecordByte_ -> {
+                        if (settings.showBytes) {
+                            sink.addInlineElement(element.startOffset, true, typeHintsFactory.textHint(""))
+                        }
                     }
+                    is SRecordData_ -> {
+                        if (settings.showData) {
+                            sink.addInlineElement(element.startOffset, false, typeHintsFactory.textHint("data:"))
+                            if (!settings.showAscii)
+                                sink.addInlineElement(element.endOffset, true, typeHintsFactory.textHint("<-end"))
+                        }
+                        if (settings.showAscii) {
+                            var asciiHint = ""
+                            element.byte_List.forEach(action = { asciiHint += getAscii(it.text) })
+                            sink.addInlineElement(element.endOffset, true, typeHintsFactory.asciiHint(asciiHint))
+                        }
+
+                    }
+                    is SRecordChecksum_ -> if (settings.showChecksum) sink.addInlineElement(element.startOffset,
+                        true,
+                        typeHintsFactory.textHint("chk:"))
                 }
-                is SRecordData_ -> if (settings.showData) {
-                    sink.addInlineElement(element.startOffset, false, typeHintsFactory.textHint("data:"))
-                    sink.addInlineElement(element.endOffset, true, typeHintsFactory.textHint("<-end"))
-                }
-                is SRecordChecksum_ -> if (settings.showChecksum) sink.addInlineElement(element.startOffset,
-                    true,
-                    typeHintsFactory.textHint("chk:"))
+                return true
             }
-            return true
         }
+
+    private fun getAscii(text: String): String {
+        if (text.length != 2) return "?"
+        val hex = Integer.parseInt(text, 16)
+        if ((hex >= 0x20) && (hex <= 0x7f)) return hex.toChar().toString()
+        return "."
     }
 }
 
