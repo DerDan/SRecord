@@ -1,11 +1,10 @@
-package com.github.derdan.explorerextension;
+package com.github.derdan.explorerextension
 
-import com.intellij.lang.Language;
+import com.intellij.lang.Language
 
-public class SRecordLanguage extends Language {
-    public static final SRecordLanguage INSTANCE = new SRecordLanguage();
-
-    private SRecordLanguage() {
-        super("SRecord");
+class SRecordLanguage : Language("SRecord") {
+    companion object {
+        @kotlin.jvm.JvmField
+        var INSTANCE: Language = SRecordLanguage()
     }
 }

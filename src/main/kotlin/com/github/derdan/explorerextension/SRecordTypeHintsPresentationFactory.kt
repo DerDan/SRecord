@@ -27,5 +27,5 @@ class SRecordTypeHintsPresentationFactory(private val factory: PresentationFacto
         return factory.seq(*presentations.toTypedArray())
     }
 
-    fun asciiHint(asciiHint: String): InlayPresentation  = factory.text(asciiHint)
+    fun asciiHint(asciiHint: String): InlayPresentation = factory.text(asciiHint)
 }

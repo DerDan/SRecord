@@ -1,10 +1,10 @@
 package com.github.derdan.explorerextension.psi;
 
+import com.github.derdan.explorerextension.SRecordFileType;
+import com.github.derdan.explorerextension.SRecordLanguage;
 import com.intellij.extapi.psi.PsiFileBase;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.FileViewProvider;
-import com.github.derdan.explorerextension.SRecordFileType;
-import com.github.derdan.explorerextension.SRecordLanguage;
 import org.jetbrains.annotations.NotNull;
 
 public class SRecordFile extends PsiFileBase {

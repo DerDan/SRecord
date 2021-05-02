@@ -15,7 +15,6 @@ import com.intellij.ui.JBColor;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
-import java.awt.font.TextAttribute;
 
 import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAttributesKey;
 
@@ -45,8 +44,6 @@ public class SRecordSyntaxHighlighter extends SyntaxHighlighterBase {
     private static final TextAttributesKey NUM_2 = TextAttributesKey.createTextAttributesKey("SRECORD_DATA2", DATA_BYTE_2);
     private static final TextAttributesKey NUM_3 = TextAttributesKey.createTextAttributesKey("SRECORD_DATA3", DATA_BYTE_3);
     private static final TextAttributesKey NUM_4 = TextAttributesKey.createTextAttributesKey("SRECORD_DATA4", DATA_BYTE_4);
-
-
 
 
     private static final TextAttributesKey[] BAD_CHAR_KEYS = new TextAttributesKey[]{BAD_CHARACTER};

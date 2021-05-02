@@ -31,7 +31,6 @@ version = properties("pluginVersion")
 // Configure project's dependencies
 repositories {
     mavenCentral()
-//    jcenter()
 }
 dependencies {
     detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.16.0")
@@ -92,22 +91,22 @@ val generateLexer = task<GenerateLexer>("generateLexer") {
 
 
 tasks {
-    // Set the compatibility versions to 11
+    // Set the compatibility versions to 1.8
     withType<JavaCompile> {
         dependsOn(generateParser)
         dependsOn(generateLexer)
-        sourceCompatibility = "11"
-        targetCompatibility = "11"
+        sourceCompatibility = "1.8"
+        targetCompatibility = "1.8"
     }
     withType<KotlinCompile> {
         dependsOn(generateParser)
         dependsOn(generateLexer)
-        kotlinOptions.jvmTarget = "11"
+        kotlinOptions.jvmTarget = "1.8"
         kotlinOptions.freeCompilerArgs += "-Xjvm-default=enable"
     }
 
     withType<Detekt> {
-        jvmTarget = "11"
+        jvmTarget = "1.8"
     }
 
     patchPluginXml {

@@ -16,6 +16,10 @@ import javax.swing.JPanel
 class SRecordInlayHintsProvider : InlayHintsProvider<SRecordInlayHintsProvider.Settings> {
     override val key: SettingsKey<Settings> get() = KEY
     override val name: String get() = "SRecord hints"
+    var numberOfRequiredAsciiChars = 2
+    var firstPrintableChar = 0x20
+    var lastPrintableChar = 0x7f
+    var hexRadix = 16
 
     data class Settings(
         var showCount: Boolean = true,
@@ -24,8 +28,7 @@ class SRecordInlayHintsProvider : InlayHintsProvider<SRecordInlayHintsProvider.S
         var showData: Boolean = true,
         var showAscii: Boolean = true,
         var showChecksum: Boolean = true,
-    ) {
-    }
+    )
 
     companion object {
         private val KEY: SettingsKey<Settings> =
@@ -72,15 +75,15 @@ class SRecordInlayHintsProvider : InlayHintsProvider<SRecordInlayHintsProvider.S
                     is SRecordData_ -> {
                         if (settings.showData) {
                             sink.addInlineElement(element.startOffset, false, typeHintsFactory.textHint("data:"))
-                            if (!settings.showAscii)
+                            if (!settings.showAscii) {
                                 sink.addInlineElement(element.endOffset, true, typeHintsFactory.textHint("<-end"))
+                            }
                         }
                         if (settings.showAscii) {
                             var asciiHint = ""
                             element.byte_List.forEach(action = { asciiHint += getAscii(it.text) })
                             sink.addInlineElement(element.endOffset, true, factory.text(asciiHint))
                         }
-
                     }
                     is SRecordChecksum_ -> if (settings.showChecksum) sink.addInlineElement(element.startOffset,
                         true,
@@ -91,15 +94,11 @@ class SRecordInlayHintsProvider : InlayHintsProvider<SRecordInlayHintsProvider.S
         }
 
     private fun getAscii(text: String): String {
-        if (text.length != 2) return "?"
-        val hex = Integer.parseInt(text, 16)
-        if ((hex >= 0x20) && (hex <= 0x7f)) return hex.toChar().toString()
+        if (text.length != numberOfRequiredAsciiChars) {
+            return "?"
+        }
+        val hex = Integer.parseInt(text, hexRadix)
+        if ((hex >= firstPrintableChar) && (hex <= lastPrintableChar)) return hex.toChar().toString()
         return "."
     }
 }
-
-//private fun SRecordByte_.getValue() {
-//    TODO("Not yet implemented")
-//}
-
-

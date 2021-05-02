@@ -17,7 +17,7 @@
         <codeInsight.inlayProvider language="SRecord"
                                    implementationClass="com.github.derdan.explorerextension.SRecordInlayHintsProvider"/>
         <annotator language="SRecord"
-                   implementationClass="com.github.derdan.explorerextension.Annotator.SRecordAnnotator"/>
+                   implementationClass="com.github.derdan.explorerextension.annotator.SRecordAnnotator"/>
     </extensions>
 
 </idea-plugin>

@@ -1,41 +1,27 @@
-package com.github.derdan.explorerextension;
+package com.github.derdan.explorerextension
 
-import com.intellij.openapi.fileTypes.LanguageFileType;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import com.intellij.openapi.fileTypes.LanguageFileType
+import javax.swing.Icon
 
-import javax.swing.*;
-
-public class SRecordFileType extends LanguageFileType {
-    public static final SRecordFileType INSTANCE = new SRecordFileType();
-
-    private SRecordFileType() {
-        super(SRecordLanguage.INSTANCE);
+class SRecordFileType private constructor() : LanguageFileType(SRecordLanguage.INSTANCE) {
+    override fun getName(): String {
+        return "SRecord File"
     }
 
-    @NotNull
-    @Override
-    public String getName() {
-        return "SRecord File";
+    override fun getDescription(): String {
+        return "SRecord text file containing binary data"
     }
 
-    @NotNull
-    @Override
-    public String getDescription() {
-        return "SRecord text file containing binary data";
+    override fun getDefaultExtension(): String {
+        return "srec"
     }
 
-    @NotNull
-    @Override
-    public String getDefaultExtension() {
-        return "srec";
+    override fun getIcon(): Icon? {
+        return SRecordIcon.FILE
     }
 
-    @Nullable
-    @Override
-    public Icon getIcon() {
-        return SRecordIcon.FILE;
+    companion object {
+        @JvmField
+        val INSTANCE = SRecordFileType()
     }
-
 }
-
