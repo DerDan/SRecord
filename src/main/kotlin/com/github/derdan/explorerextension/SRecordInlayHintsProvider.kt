@@ -16,10 +16,6 @@ import javax.swing.JPanel
 class SRecordInlayHintsProvider : InlayHintsProvider<SRecordInlayHintsProvider.Settings> {
     override val key: SettingsKey<Settings> get() = KEY
     override val name: String get() = "SRecord hints"
-    var numberOfRequiredAsciiChars = 2
-    var firstPrintableChar = 0x20
-    var lastPrintableChar = 0x7f
-    var hexRadix = 16
 
     data class Settings(
         var showCount: Boolean = true,
@@ -31,8 +27,11 @@ class SRecordInlayHintsProvider : InlayHintsProvider<SRecordInlayHintsProvider.S
     )
 
     companion object {
-        private val KEY: SettingsKey<Settings> =
-            SettingsKey("srecord.record.hints")
+        private val KEY: SettingsKey<Settings> = SettingsKey("srecord.record.hints")
+        private const val NUMBER_OF_REQUIRED_ASCII_CHARS = 2
+        private const val FIRST_PRINTABLE_CHAR = 0x20
+        private const val HEX_RADIX = 16
+        private const val LAST_PRINTABLE_CHAR = 0x7f
     }
 
     override val previewText: String
@@ -94,11 +93,15 @@ class SRecordInlayHintsProvider : InlayHintsProvider<SRecordInlayHintsProvider.S
         }
 
     private fun getAscii(text: String): String {
-        if (text.length != numberOfRequiredAsciiChars) {
-            return "?"
+        var result = "?"
+        if (text.length == Companion.NUMBER_OF_REQUIRED_ASCII_CHARS) {
+            val hex = Integer.parseInt(text, Companion.HEX_RADIX)
+            result = when {
+                (hex >= Companion.FIRST_PRINTABLE_CHAR) && (hex <= Companion.LAST_PRINTABLE_CHAR) -> hex.toChar()
+                    .toString()
+                else -> "."
+            }
         }
-        val hex = Integer.parseInt(text, hexRadix)
-        if ((hex >= firstPrintableChar) && (hex <= lastPrintableChar)) return hex.toChar().toString()
-        return "."
+        return result
     }
 }

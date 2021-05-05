@@ -4,5 +4,18 @@
 formatting:
   Indentation:
     continuationIndentSize: 8
+
+  NoWildcardImports:
+    active: false
+
   ParameterListWrapping:
-    indentSize: 8
+    indentSize: 4
+
+performance:
+  SpreadOperator:
+    active: false
+
+style:
+  WildcardImport:
+    excludeImports: ['java.util.*', 'kotlinx.android.synthetic.*', 'com.intellij.codeInsight.hints.*', 'com.github.derdan.explorerextension.psi.*']
+

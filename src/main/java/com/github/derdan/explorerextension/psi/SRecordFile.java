@@ -23,5 +23,4 @@ public class SRecordFile extends PsiFileBase {
     public String toString() {
         return "SRecord File";
     }
-
 }
