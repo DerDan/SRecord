@@ -18,6 +18,7 @@
                                    implementationClass="com.github.derdan.explorerextension.SRecordInlayHintsProvider"/>
         <annotator language="SRecord"
                    implementationClass="com.github.derdan.explorerextension.annotator.SRecordAnnotator"/>
+        <editor.linePainter implementation="com.github.derdan.explorerextension.linepainter.SRecordLinePainter"/>
     </extensions>
 
 </idea-plugin>

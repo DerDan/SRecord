@@ -16,23 +16,21 @@ import javax.swing.JPanel
 class SRecordInlayHintsProvider : InlayHintsProvider<SRecordInlayHintsProvider.Settings> {
     override val key: SettingsKey<Settings> get() = KEY
     override val name: String get() = "SRecord hints"
-    var numberOfRequiredAsciiChars = 2
-    var firstPrintableChar = 0x20
-    var lastPrintableChar = 0x7f
-    var hexRadix = 16
 
     data class Settings(
         var showCount: Boolean = true,
         var showAddress: Boolean = true,
         var showBytes: Boolean = true,
         var showData: Boolean = true,
-        var showAscii: Boolean = true,
         var showChecksum: Boolean = true,
     )
 
     companion object {
-        private val KEY: SettingsKey<Settings> =
-            SettingsKey("srecord.record.hints")
+        private val KEY: SettingsKey<Settings> = SettingsKey("srecord.record.hints")
+        private const val NUMBER_OF_REQUIRED_ASCII_CHARS = 2
+        private const val FIRST_PRINTABLE_CHAR = 0x20
+        private const val HEX_RADIX = 16
+        private const val LAST_PRINTABLE_CHAR = 0x7f
     }
 
     override val previewText: String
@@ -46,7 +44,6 @@ class SRecordInlayHintsProvider : InlayHintsProvider<SRecordInlayHintsProvider.S
                 ImmediateConfigurable.Case("show Address", "showAddress", settings::showAddress),
                 ImmediateConfigurable.Case("show Bytes", "showBytes", settings::showBytes),
                 ImmediateConfigurable.Case("show Data", "showData", settings::showData),
-                ImmediateConfigurable.Case("show ASCII", "showData", settings::showAscii),
                 ImmediateConfigurable.Case("show Checksum", "showChecksum", settings::showChecksum),
             )
 
@@ -75,14 +72,7 @@ class SRecordInlayHintsProvider : InlayHintsProvider<SRecordInlayHintsProvider.S
                     is SRecordData_ -> {
                         if (settings.showData) {
                             sink.addInlineElement(element.startOffset, false, typeHintsFactory.textHint("data:"))
-                            if (!settings.showAscii) {
-                                sink.addInlineElement(element.endOffset, true, typeHintsFactory.textHint("<-end"))
-                            }
-                        }
-                        if (settings.showAscii) {
-                            var asciiHint = ""
-                            element.byte_List.forEach(action = { asciiHint += getAscii(it.text) })
-                            sink.addInlineElement(element.endOffset, true, factory.text(asciiHint))
+                            sink.addInlineElement(element.endOffset, true, typeHintsFactory.textHint("<-end"))
                         }
                     }
                     is SRecordChecksum_ -> if (settings.showChecksum) sink.addInlineElement(element.startOffset,
@@ -92,13 +82,4 @@ class SRecordInlayHintsProvider : InlayHintsProvider<SRecordInlayHintsProvider.S
                 return true
             }
         }
-
-    private fun getAscii(text: String): String {
-        if (text.length != numberOfRequiredAsciiChars) {
-            return "?"
-        }
-        val hex = Integer.parseInt(text, hexRadix)
-        if ((hex >= firstPrintableChar) && (hex <= lastPrintableChar)) return hex.toChar().toString()
-        return "."
-    }
 }

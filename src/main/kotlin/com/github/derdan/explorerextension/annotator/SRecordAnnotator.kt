@@ -18,8 +18,14 @@ class SRecordAnnotator : Annotator {
                 val i = parent.children.indexOf(element)
                 val rangeToHighlight = TextRange(element.startOffset, element.startOffset + 1)
                 holder.newSilentAnnotation(HighlightSeverity.INFORMATION)
-                    .range(rangeToHighlight).textAttributes(SRecordSyntaxHighlighter.BYTES_KEYS[i % 4]).create()
+                    .range(rangeToHighlight)
+                    .textAttributes(SRecordSyntaxHighlighter.BYTES_KEYS[i % BYTE_KEY_COUNT])
+                    .create()
             }
         }
+    }
+
+    companion object {
+        private const val BYTE_KEY_COUNT = 4
     }
 }
