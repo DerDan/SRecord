@@ -12,7 +12,7 @@ object SRecordUtils {
     fun getAsciiText(element: SRecordData_): String {
         var asciiHint = ""
         element.byte_List.forEach(action = { asciiHint += getAscii(it.text) })
-        return asciiHint;
+        return asciiHint
     }
 
     private fun getAscii(text: String): String {
