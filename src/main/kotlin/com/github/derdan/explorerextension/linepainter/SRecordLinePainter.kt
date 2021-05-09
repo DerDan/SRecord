@@ -46,7 +46,7 @@ class SRecordLinePainter : EditorLinePainter() {
                 }
             }
             if (text.isNotEmpty()) {
-                return listOf(LineExtensionInfo("  " + text, attributes))
+                return listOf(LineExtensionInfo("  $text", attributes))
             }
         }
         return null
