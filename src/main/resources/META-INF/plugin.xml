@@ -9,7 +9,7 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <fileType name="SRecord File" implementationClass="com.github.derdan.explorerextension.SRecordFileType"
-                  fieldName="INSTANCE" language="SRecord" extensions="srec"/>
+                  fieldName="INSTANCE" language="SRecord" extensions="srec;s19;s28;s37"/>
         <lang.parserDefinition language="SRecord"
                                implementationClass="com.github.derdan.explorerextension.SRecordParserDefinition"/>
         <lang.syntaxHighlighter language="SRecord"

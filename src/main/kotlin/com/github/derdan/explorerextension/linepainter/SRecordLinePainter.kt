@@ -2,6 +2,7 @@ package com.github.derdan.explorerextension.linepainter
 
 import com.github.derdan.explorerextension.SRecordFileType
 import com.github.derdan.explorerextension.SRecordUtils
+import com.github.derdan.explorerextension.psi.SRecordAddress_
 import com.github.derdan.explorerextension.psi.SRecordRecord
 import com.intellij.openapi.editor.EditorLinePainter
 import com.intellij.openapi.editor.LineExtensionInfo
@@ -36,13 +37,19 @@ class SRecordLinePainter : EditorLinePainter() {
                 text = SRecordUtils.getAsciiText(data)
             } else {
                 if (parent3.startRecord16 != null) {
-                    text = "= start address"
+                    text = getStartAddressText(parent3.startRecord16!!.address_)
                 }
                 if (parent3.startRecord24 != null) {
-                    text = "= start address"
+                    text = getStartAddressText(parent3.startRecord24!!.address_)
                 }
                 if (parent3.startRecord32 != null) {
-                    text = "= start address"
+                    text = getStartAddressText(parent3.startRecord32!!.address_)
+                }
+                if (parent3.countRecord16 != null) {
+                    text = getRecordCountText(parent3.countRecord16!!.address_)
+                }
+                if (parent3.countRecord24 != null) {
+                    text = getRecordCountText(parent3.countRecord24!!.address_)
                 }
             }
             if (text.isNotEmpty()) {
@@ -50,6 +57,15 @@ class SRecordLinePainter : EditorLinePainter() {
             }
         }
         return null
+    }
+
+    private fun getStartAddressText(address: SRecordAddress_): String {
+        return "start address 0x" + address.text
+    }
+
+    private fun getRecordCountText(address: SRecordAddress_): String {
+        val count = Integer.parseInt(address.text, HEX_RADIX)
+        return "= record count $count"
     }
 
     private fun getElement(
@@ -68,5 +84,9 @@ class SRecordLinePainter : EditorLinePainter() {
             }
         }
         return null
+    }
+
+    companion object {
+        const val HEX_RADIX = 16
     }
 }
