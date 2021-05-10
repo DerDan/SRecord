@@ -21,7 +21,7 @@ class SRecordLinePainter : EditorLinePainter() {
         file: VirtualFile,
         lineNumber: Int,
     ): Collection<LineExtensionInfo>? {
-        val record = getElement(file, project, lineNumber)
+        val record = getElementAtLine(file, project, lineNumber)
         val parent1 = record?.parent
         val parent2 = parent1?.parent
         val parent3 = parent2?.parent
@@ -68,7 +68,7 @@ class SRecordLinePainter : EditorLinePainter() {
         return "= record count $count"
     }
 
-    private fun getElement(
+    private fun getElementAtLine(
         file: VirtualFile,
         project: Project,
         lineNumber: Int
