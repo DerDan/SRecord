@@ -44,8 +44,7 @@ public class SRecordSyntaxHighlighter extends SyntaxHighlighterBase {
     private static final TextAttributesKey NUM_2 = TextAttributesKey.createTextAttributesKey("SRECORD_DATA2", DATA_BYTE_2);
     private static final TextAttributesKey NUM_3 = TextAttributesKey.createTextAttributesKey("SRECORD_DATA3", DATA_BYTE_3);
     private static final TextAttributesKey NUM_4 = TextAttributesKey.createTextAttributesKey("SRECORD_DATA4", DATA_BYTE_4);
-
-
+    public static final TextAttributesKey[] BYTES_KEYS = new TextAttributesKey[]{NUM_1, NUM_2, NUM_3, NUM_4};
     private static final TextAttributesKey[] BAD_CHAR_KEYS = new TextAttributesKey[]{BAD_CHARACTER};
     private static final TextAttributesKey[] SEPARATOR_KEYS = new TextAttributesKey[]{SEPARATOR};
     private static final TextAttributesKey[] KEY_KEYS = new TextAttributesKey[]{KEY};
@@ -53,7 +52,6 @@ public class SRecordSyntaxHighlighter extends SyntaxHighlighterBase {
     private static final TextAttributesKey[] COMMENT_KEYS = new TextAttributesKey[]{COMMENT};
     private static final TextAttributesKey[] PARAMETER_KEYS = new TextAttributesKey[]{PARAMETER};
     private static final TextAttributesKey[] EMPTY_KEYS = new TextAttributesKey[0];
-    public static final TextAttributesKey[] BYTES_KEYS = new TextAttributesKey[]{NUM_1, NUM_2, NUM_3, NUM_4};
 
     @NotNull
     @Override
