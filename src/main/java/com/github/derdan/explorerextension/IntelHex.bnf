@@ -1,0 +1,34 @@
+{
+    tokens = [
+    IH_RECORD_MARK=':'
+    IH_BYTE='regexp:([0-9A-F]{2})'
+    IH_EOL='regexp:\R'
+    ]
+  parserClass="com.github.derdan.explorerextension.IntelHexParser"
+
+  extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+  psiClassPrefix="IntelHex"
+  psiImplClassSuffix="Impl"
+  psiPackage="com.github.derdan.explorerextension.psi"
+  psiImplPackage="com.github.derdan.explorerextension.psi.impl"
+
+  elementTypeHolderClass="com.github.derdan.explorerextension.psi.SRecordTypes"
+  elementTypeClass="com.github.derdan.explorerextension.psi.SRecordElementType"
+  parserUtilClass="com.github.derdan.explorerextension.HexParserUtil"
+}
+
+external len_rule ::= intelHexRecords
+
+intelHexRecords ::= intelHexRecord *
+
+intelHexRecord ::= recordMark recLen loadOffset recTyp infoOrData  IH_EOL?
+
+
+recordMark ::=   IH_RECORD_MARK
+recLen ::=       IH_BYTE
+loadOffset ::=   IH_BYTE          IH_BYTE
+recTyp ::=       IH_BYTE
+infoOrData ::=   IH_BYTE *
+checkSum ::=     IH_BYTE
+//RECORD_START BYTE* CHECKSUM EOL?

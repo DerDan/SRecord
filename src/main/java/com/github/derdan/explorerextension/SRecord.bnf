@@ -27,7 +27,6 @@ record ::=
     |   start_record_32
 )
 
-
 checksum_ ::= CHECKSUM
 count_ ::= COUNT
 byte_ ::= BYTE
@@ -52,8 +51,8 @@ block_record ::=    block_header_     count_ address_  data_  checksum_
 data_record_16 ::=  data_header_16_   count_ address_  data_  checksum_
 data_record_24 ::=  data_header_24_   count_ address_  data_  checksum_
 data_record_32 ::=  data_header_32_   count_ address_  data_  checksum_
-count_record_16 ::= count_header_16_  count_ address_  data_  checksum_
-count_record_24 ::= count_header_24_  count_ address_  data_  checksum_
+count_record_16 ::= count_header_16_  count_ address_         checksum_
+count_record_24 ::= count_header_24_  count_ address_         checksum_
 start_record_16 ::= start_address_16_ count_ address_         checksum_
 start_record_24 ::= start_address_24_ count_ address_         checksum_
 start_record_32 ::= start_address_32_ count_ address_         checksum_
