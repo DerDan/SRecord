@@ -1,7 +1,7 @@
 {
     tokens = [
     IH_RECORD_MARK=':'
-    IH_BYTE='regexp:([0-9A-F]{2})'
+    IH_BYTE='regexp:[0-9A-F]{2}'
     IH_EOL='regexp:\R'
     ]
   parserClass="com.github.derdan.explorerextension.IntelHexParser"
@@ -13,16 +13,18 @@
   psiPackage="com.github.derdan.explorerextension.psi"
   psiImplPackage="com.github.derdan.explorerextension.psi.impl"
 
-  elementTypeHolderClass="com.github.derdan.explorerextension.psi.SRecordTypes"
-  elementTypeClass="com.github.derdan.explorerextension.psi.SRecordElementType"
+  elementTypeHolderClass="com.github.derdan.explorerextension.psi.IntelHexTypes"
+  elementTypeClass="com.github.derdan.explorerextension.psi.IntelHexElementType"
+
   parserUtilClass="com.github.derdan.explorerextension.HexParserUtil"
+
 }
 
-external len_rule ::= intelHexRecords
 
 intelHexRecords ::= intelHexRecord *
 
-intelHexRecord ::= recordMark recLen loadOffset recTyp infoOrData  IH_EOL?
+
+intelHexRecord ::= recordMark <<len_rule>> loadOffset recTyp infoOrData  IH_EOL?
 
 
 recordMark ::=   IH_RECORD_MARK

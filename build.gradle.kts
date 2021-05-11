@@ -22,7 +22,6 @@ plugins {
     id("org.jlleitschuh.gradle.ktlint") version "10.0.0"
 
     id("org.jetbrains.grammarkit") version "2021.1.3"
-
 }
 
 group = properties("pluginGroup")
@@ -90,7 +89,6 @@ val generateLexer = task<GenerateLexer>("generateLexer") {
     purgeOldFiles = true
 }
 
-
 tasks {
     // Set the compatibility versions to 11
     withType<JavaCompile> {
@@ -107,6 +105,8 @@ tasks {
     }
 
     withType<Detekt> {
+        dependsOn(generateParser)
+        dependsOn(generateLexer)
         jvmTarget = "11"
     }
 
