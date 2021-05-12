@@ -1,1 +1,1 @@
-rootProject.name = "ExplorerExtension"
+rootProject.name = "SRecord"

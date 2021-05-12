@@ -1,6 +1,6 @@
 <!-- Keep a Changelog guide -> https://keepachangelog.com -->
 
-# ExplorerExtension Changelog
+# SRecord Changelog
 
 ## [Unreleased]
 ### Added
