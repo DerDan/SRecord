@@ -17,5 +17,5 @@ performance:
 
 style:
   WildcardImport:
-    excludeImports: ['java.util.*', 'kotlinx.android.synthetic.*', 'com.intellij.codeInsight.hints.*', 'com.github.derdan.explorerextension.psi.*']
+    excludeImports: ['java.util.*', 'kotlinx.android.synthetic.*', 'com.intellij.codeInsight.hints.*', 'com.github.derdan.srecord.psi.*']
 

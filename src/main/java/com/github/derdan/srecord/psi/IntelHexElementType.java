@@ -1,6 +1,6 @@
-package com.github.derdan.explorerextension.psi;
+package com.github.derdan.srecord.psi;
 
-import com.github.derdan.explorerextension.SRecordLanguage;
+import com.github.derdan.srecord.SRecordLanguage;
 import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;

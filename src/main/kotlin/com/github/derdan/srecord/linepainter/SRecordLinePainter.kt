@@ -1,9 +1,9 @@
-package com.github.derdan.explorerextension.linepainter
+package com.github.derdan.srecord.linepainter
 
-import com.github.derdan.explorerextension.SRecordFileType
-import com.github.derdan.explorerextension.SRecordUtils
-import com.github.derdan.explorerextension.psi.SRecordAddress_
-import com.github.derdan.explorerextension.psi.SRecordRecord
+import com.github.derdan.srecord.SRecordFileType
+import com.github.derdan.srecord.SRecordUtils
+import com.github.derdan.srecord.psi.SRecordAddress_
+import com.github.derdan.srecord.psi.SRecordRecord
 import com.intellij.openapi.editor.EditorLinePainter
 import com.intellij.openapi.editor.LineExtensionInfo
 import com.intellij.openapi.editor.colors.EditorColorsManager

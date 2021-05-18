@@ -1,4 +1,4 @@
-package com.github.derdan.explorerextension
+package com.github.derdan.srecord
 
 import com.intellij.codeInsight.hints.presentation.InlayPresentation
 import com.intellij.codeInsight.hints.presentation.PresentationFactory

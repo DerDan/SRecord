@@ -72,10 +72,10 @@ detekt {
 val generateParser = task<GenerateParser>("generateParser") {
     group = "build"
     description = "Generate the Parser"
-    source = "src/main/java/com/github/derdan/explorerextension/SRecord.bnf"
+    source = "src/main/java/com/github/derdan/srecord/SRecord.bnf"
     targetRoot = "src/main/gen/"
-    pathToParser = "com/github/derdan/explorerextension/SRecordParser.java"
-    pathToPsiRoot = "com/github/derdan/explorerextension/psi"
+    pathToParser = "com/github/derdan/srecord/SRecordParser.java"
+    pathToPsiRoot = "com/github/derdan/srecord/psi"
     purgeOldFiles = true
 }
 
@@ -83,8 +83,8 @@ val generateLexer = task<GenerateLexer>("generateLexer") {
     dependsOn(generateParser)
     group = "build"
     description = "Generate the Lexer"
-    source = "src/main/java/com/github/derdan/explorerextension/SRecord.flex"
-    targetDir = "src/main/gen/com/github/derdan/explorerextension"
+    source = "src/main/java/com/github/derdan/srecord/SRecord.flex"
+    targetDir = "src/main/gen/com/github/derdan/srecord"
     targetClass = "SRecordLexer"
     purgeOldFiles = true
 }

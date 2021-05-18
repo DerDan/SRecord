@@ -1,16 +1,18 @@
 {
-  parserClass="com.github.derdan.explorerextension.SRecordParser"
+  parserClass="com.github.derdan.srecord.SRecordParser"
 
   extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+//  lexer="com.intellij.lexer.FlexLexer"
+
 
   psiClassPrefix="SRecord"
   psiImplClassSuffix="Impl"
-  psiPackage="com.github.derdan.explorerextension.psi"
-  psiImplPackage="com.github.derdan.explorerextension.psi.impl"
+  psiPackage="com.github.derdan.srecord.psi"
+  psiImplPackage="com.github.derdan.srecord.psi.impl"
 
-  elementTypeHolderClass="com.github.derdan.explorerextension.psi.SRecordTypes"
-  elementTypeClass="com.github.derdan.explorerextension.psi.SRecordElementType"
-  tokenTypeClass="com.github.derdan.explorerextension.psi.SRecordTokenType"
+  elementTypeHolderClass="com.github.derdan.srecord.psi.SRecordTypes"
+  elementTypeClass="com.github.derdan.srecord.psi.SRecordElementType"
+  tokenTypeClass="com.github.derdan.srecord.psi.SRecordTokenType"
 }
 
 srecordFile ::= (record EOL)* record?

@@ -1,4 +1,4 @@
-package com.github.derdan.explorerextension
+package com.github.derdan.srecord
 
 import com.intellij.openapi.fileTypes.LanguageFileType
 import javax.swing.Icon

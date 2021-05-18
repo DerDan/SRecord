@@ -1,7 +1,7 @@
-package com.github.derdan.explorerextension;
+package com.github.derdan.srecord;
 
 
-import com.github.derdan.explorerextension.psi.SRecordTypes;
+import com.github.derdan.srecord.psi.SRecordTypes;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.HighlighterColors;

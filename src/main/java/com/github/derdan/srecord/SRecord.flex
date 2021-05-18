@@ -1,9 +1,9 @@
 // Copyright 2000-2020 JetBrains s.r.o. and other contributors. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
-package com.github.derdan.explorerextension;
+package com.github.derdan.srecord;
 
 import com.intellij.lexer.FlexLexer;
 import com.intellij.psi.tree.IElementType;
-import com.github.derdan.explorerextension.psi.SRecordTypes;
+import com.github.derdan.srecord.psi.SRecordTypes;
 import com.intellij.psi.TokenType;
 
 %%

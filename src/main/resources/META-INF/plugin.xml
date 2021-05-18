@@ -1,6 +1,6 @@
 <idea-plugin>
-    <id>com.github.derdan.explorerextension</id>
-    <name>ExplorerExtension</name>
+    <id>com.github.derdan.srecord</id>
+    <name>SRecord</name>
     <vendor>derdan</vendor>
 
     <!-- Product and plugin compatibility requirements -->
@@ -8,17 +8,17 @@
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <fileType name="SRecord File" implementationClass="com.github.derdan.explorerextension.SRecordFileType"
+        <fileType name="SRecord File" implementationClass="com.github.derdan.srecord.SRecordFileType"
                   fieldName="INSTANCE" language="SRecord" extensions="srec;s19;s28;s37"/>
         <lang.parserDefinition language="SRecord"
-                               implementationClass="com.github.derdan.explorerextension.SRecordParserDefinition"/>
+                               implementationClass="com.github.derdan.srecord.SRecordParserDefinition"/>
         <lang.syntaxHighlighter language="SRecord"
-                                implementationClass="com.github.derdan.explorerextension.SRecordSyntaxHighlighter"/>
+                                implementationClass="com.github.derdan.srecord.SRecordSyntaxHighlighter"/>
         <codeInsight.inlayProvider language="SRecord"
-                                   implementationClass="com.github.derdan.explorerextension.SRecordInlayHintsProvider"/>
+                                   implementationClass="com.github.derdan.srecord.SRecordInlayHintsProvider"/>
         <annotator language="SRecord"
-                   implementationClass="com.github.derdan.explorerextension.annotator.SRecordAnnotator"/>
-        <editor.linePainter implementation="com.github.derdan.explorerextension.linepainter.SRecordLinePainter"/>
+                   implementationClass="com.github.derdan.srecord.annotator.SRecordAnnotator"/>
+        <editor.linePainter implementation="com.github.derdan.srecord.linepainter.SRecordLinePainter"/>
     </extensions>
 
 </idea-plugin>

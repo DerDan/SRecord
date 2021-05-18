@@ -1,7 +1,7 @@
-package com.github.derdan.explorerextension.psi;
+package com.github.derdan.srecord.psi;
 
-import com.github.derdan.explorerextension.SRecordFileType;
-import com.github.derdan.explorerextension.SRecordLanguage;
+import com.github.derdan.srecord.SRecordFileType;
+import com.github.derdan.srecord.SRecordLanguage;
 import com.intellij.extapi.psi.PsiFileBase;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.FileViewProvider;

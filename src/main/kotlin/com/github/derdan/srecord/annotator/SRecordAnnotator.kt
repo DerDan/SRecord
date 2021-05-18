@@ -1,8 +1,8 @@
-package com.github.derdan.explorerextension.annotator
+package com.github.derdan.srecord.annotator
 
-import com.github.derdan.explorerextension.SRecordSyntaxHighlighter
-import com.github.derdan.explorerextension.psi.SRecordByte_
-import com.github.derdan.explorerextension.psi.SRecordData_
+import com.github.derdan.srecord.SRecordSyntaxHighlighter
+import com.github.derdan.srecord.psi.SRecordByte_
+import com.github.derdan.srecord.psi.SRecordData_
 import com.intellij.lang.annotation.AnnotationHolder
 import com.intellij.lang.annotation.Annotator
 import com.intellij.lang.annotation.HighlightSeverity

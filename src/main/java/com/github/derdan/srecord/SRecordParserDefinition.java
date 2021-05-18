@@ -1,7 +1,7 @@
-package com.github.derdan.explorerextension;
+package com.github.derdan.srecord;
 
-import com.github.derdan.explorerextension.psi.SRecordFile;
-import com.github.derdan.explorerextension.psi.SRecordTypes;
+import com.github.derdan.srecord.psi.SRecordFile;
+import com.github.derdan.srecord.psi.SRecordTypes;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.ParserDefinition;
 import com.intellij.lang.PsiParser;
@@ -54,18 +54,18 @@ public class SRecordParserDefinition implements ParserDefinition {
     }
 
     @Override
-    public IFileElementType getFileNodeType() {
+    public @NotNull IFileElementType getFileNodeType() {
         return FILE;
     }
 
     @Override
-    public PsiFile createFile(FileViewProvider viewProvider) {
+    public @NotNull PsiFile createFile(@NotNull FileViewProvider viewProvider) {
         return new SRecordFile(viewProvider);
     }
 
     @Override
-    public SpaceRequirements spaceExistenceTypeBetweenTokens(ASTNode left, ASTNode right) {
-        return SpaceRequirements.MAY;
+    public @NotNull SpaceRequirements spaceExistenceTypeBetweenTokens(ASTNode left, ASTNode right) {
+        return SpaceRequirements.MUST_NOT;
     }
 
     @NotNull

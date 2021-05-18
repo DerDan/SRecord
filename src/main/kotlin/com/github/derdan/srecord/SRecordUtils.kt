@@ -1,6 +1,6 @@
-package com.github.derdan.explorerextension
+package com.github.derdan.srecord
 
-import com.github.derdan.explorerextension.psi.SRecordData_
+import com.github.derdan.srecord.psi.SRecordData_
 
 object SRecordUtils {
 
