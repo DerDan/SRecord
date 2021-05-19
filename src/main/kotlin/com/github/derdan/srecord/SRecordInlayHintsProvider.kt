@@ -50,42 +50,42 @@ class SRecordInlayHintsProvider : InlayHintsProvider<SRecordInlayHintsProvider.S
 
     override fun getCollectorFor(file: PsiFile, editor: Editor, settings: Settings, sink: InlayHintsSink):
         InlayHintsCollector = object : FactoryInlayHintsCollector(editor) {
-        val typeHintsFactory = SRecordTypeHintsPresentationFactory(factory)
-        override fun collect(element: PsiElement, editor: Editor, sink: InlayHintsSink): Boolean {
-            if (file.project.service<DumbService>().isDumb) return true
-            when (element) {
-                is SRecordCount_ -> if (settings.showCount) sink.addInlineElement(
-                    element.startOffset, true,
-                    typeHintsFactory.textHint("count:"), false
-                )
-                is SRecordAddress_ -> if (settings.showAddress) sink.addInlineElement(
-                    element.startOffset,
-                    true,
-                    typeHintsFactory.textHint("addr:"), false
-                )
-                is SRecordByte_ -> {
-                    if (settings.showBytes) {
-                        sink.addInlineElement(
-                            element.startOffset,
-                            true,
-                            factory.textSpacePlaceholder(1, true),
-                            false
-                        )
+            val typeHintsFactory = SRecordTypeHintsPresentationFactory(factory)
+            override fun collect(element: PsiElement, editor: Editor, sink: InlayHintsSink): Boolean {
+                if (file.project.service<DumbService>().isDumb) return true
+                when (element) {
+                    is SRecordCount_ -> if (settings.showCount) sink.addInlineElement(
+                        element.startOffset, true,
+                        typeHintsFactory.textHint("count:"), false
+                    )
+                    is SRecordAddress_ -> if (settings.showAddress) sink.addInlineElement(
+                        element.startOffset,
+                        true,
+                        typeHintsFactory.textHint("addr:"), false
+                    )
+                    is SRecordByte_ -> {
+                        if (settings.showBytes) {
+                            sink.addInlineElement(
+                                element.startOffset,
+                                true,
+                                factory.textSpacePlaceholder(1, true),
+                                false
+                            )
+                        }
                     }
-                }
-                is SRecordData_ -> {
-                    if (settings.showData) {
-                        sink.addInlineElement(element.startOffset, false, typeHintsFactory.textHint("data:"), false)
-                        sink.addInlineElement(element.endOffset, true, typeHintsFactory.textHint("<-end"), false)
+                    is SRecordData_ -> {
+                        if (settings.showData) {
+                            sink.addInlineElement(element.startOffset, false, typeHintsFactory.textHint("data:"), false)
+                            sink.addInlineElement(element.endOffset, true, typeHintsFactory.textHint("<-end"), false)
+                        }
                     }
+                    is SRecordChecksum_ -> if (settings.showChecksum) sink.addInlineElement(
+                        element.startOffset,
+                        true,
+                        typeHintsFactory.textHint("chk:"), false
+                    )
                 }
-                is SRecordChecksum_ -> if (settings.showChecksum) sink.addInlineElement(
-                    element.startOffset,
-                    true,
-                    typeHintsFactory.textHint("chk:"), false
-                )
+                return true
             }
-            return true
         }
-    }
 }
